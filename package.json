@@ -1,0 +1,20 @@
+{
+  "name": "badak-test-comparison",
+  "version": "1.0.0",
+  "description": "Fetch and compare engineering report data",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "fetch": "node fetchData.js",
+    "compare": "node compareData.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "puppeteer": "^24.32.0",
+    "sharp": "^0.33.5"
+  }
+}

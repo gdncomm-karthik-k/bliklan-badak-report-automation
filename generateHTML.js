@@ -13,7 +13,7 @@ export function generateHTML(comparisonResults, todayDate, yesterdayDate, hasYes
     // Sanity change indicator
     const sanityChangeSign = result.sanityPassRateChange > 0 ? '+' : '';
     let sanityChangeDisplay;
-    if (hasYesterdayData && result.sanityChanged) {
+    if (hasYesterdayData && result.sanityChanged && Math.abs(result.sanityPassRateChange) > 0.01) {
       const sanityColor = result.sanityPassRateChange > 0 ? '#28a745' : '#dc3545';
       sanityChangeDisplay = `<span style="color: ${sanityColor}; font-weight: 600;"><span style="color: ${sanityColor}; margin-right: 5px;">●</span>${sanityChangeSign}${result.sanityPassRateChange}%</span>`;
     } else {
@@ -23,7 +23,7 @@ export function generateHTML(comparisonResults, todayDate, yesterdayDate, hasYes
     // Integration change indicator
     const intChangeSign = result.intPassRateChange > 0 ? '+' : '';
     let intChangeDisplay;
-    if (hasYesterdayData && result.intChanged) {
+    if (hasYesterdayData && result.intChanged && Math.abs(result.intPassRateChange) > 0.01) {
       const intColor = result.intPassRateChange > 0 ? '#28a745' : '#dc3545';
       intChangeDisplay = `<span style="color: ${intColor}; font-weight: 600;"><span style="color: ${intColor}; margin-right: 5px;">●</span>${intChangeSign}${result.intPassRateChange}%</span>`;
     } else {

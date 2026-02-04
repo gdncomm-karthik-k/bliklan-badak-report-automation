@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { API_URL, DATA_DIR } from './config.js';
+import { ENVIRONMENTS, DATA_DIR } from './config.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,10 +33,10 @@ function getYesterdayDateString() {
   return `${year}-${month}-${day}`;
 }
 
-async function fetchData() {
+async function fetchDataForEnvironment(env) {
   try {
-    console.log('Fetching data from API...');
-    const response = await fetch(API_URL);
+    console.log(`Fetching data from ${env.name} API...`);
+    const response = await fetch(env.url);
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -47,26 +47,43 @@ async function fetchData() {
     if (data.code === 200 && data.status === 'OK') {
       const dataPath = await ensureDataDir();
       const dateString = getDateString();
-      const fileName = `data-${dateString}.json`;
+      const fileName = `data-${env.name.toLowerCase()}-${dateString}.json`;
       const filePath = path.join(dataPath, fileName);
       
       await fs.writeFile(filePath, JSON.stringify(data, null, 2));
-      console.log(`✅ Data saved successfully to ${filePath}`);
+      console.log(`✅ ${env.name} data saved successfully to ${filePath}`);
       
       return {
         success: true,
         data: data,
         filePath: filePath,
-        dateString: dateString
+        dateString: dateString,
+        envName: env.name,
+        envId: env.id
       };
     } else {
       throw new Error(`API returned error: ${data.status}`);
     }
   } catch (error) {
-    console.error('❌ Error fetching data:', error.message);
+    console.error(`❌ Error fetching ${env.name} data:`, error.message);
     throw error;
   }
 }
 
-export { fetchData, getDateString, getYesterdayDateString };
+async function fetchAllEnvironments() {
+  const results = {};
+  
+  for (const env of ENVIRONMENTS) {
+    results[env.name] = await fetchDataForEnvironment(env);
+  }
+  
+  return results;
+}
+
+// Keep for backward compatibility
+async function fetchData() {
+  return fetchDataForEnvironment(ENVIRONMENTS[0]);
+}
+
+export { fetchData, fetchAllEnvironments, getDateString, getYesterdayDateString };
 

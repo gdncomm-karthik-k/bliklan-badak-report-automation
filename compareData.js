@@ -3,15 +3,18 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { DATA_DIR, SERVICE_NAMES } from './config.js';
 import { getDateString, getYesterdayDateString } from './fetchData.js';
-import { generateHTML } from './generateHTML.js';
+import { generateHTML, generateMultiEnvHTML } from './generateHTML.js';
 import { extractTableHTML } from './powerAutomate.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-async function loadDataFile(dateString) {
+async function loadDataFile(dateString, envName = null) {
   const dataPath = path.join(__dirname, DATA_DIR);
-  const fileName = `data-${dateString}.json`;
+  // Support both old format (data-YYYY-MM-DD.json) and new format (data-envname-YYYY-MM-DD.json)
+  const fileName = envName 
+    ? `data-${envName.toLowerCase()}-${dateString}.json`
+    : `data-${dateString}.json`;
   const filePath = path.join(dataPath, fileName);
   
   try {
@@ -31,11 +34,11 @@ function getDateStringForDaysAgo(daysAgo) {
   return `${year}-${month}-${day}`;
 }
 
-async function findMostRecentDataFile(maxDaysBack = 30) {
+async function findMostRecentDataFile(maxDaysBack = 30, envName = null) {
   // Start from yesterday and go backwards
   for (let daysAgo = 1; daysAgo <= maxDaysBack; daysAgo++) {
     const dateString = getDateStringForDaysAgo(daysAgo);
-    const data = await loadDataFile(dateString);
+    const data = await loadDataFile(dateString, envName);
     if (data) {
       return { data, dateString, daysAgo };
     }
@@ -129,6 +132,78 @@ function calculateComparison(todayData, yesterdayData) {
   return results;
 }
 
+async function compareDataForEnv(todayData, envName) {
+  const todayDateString = getDateString();
+  const yesterdayDateString = getYesterdayDateString();
+  
+  console.log(`\n📊 [${envName}] Comparing data: Today (${todayDateString}) vs Previous available date`);
+  
+  // Try to find the most recent available data file for this environment
+  const previousDataResult = await findMostRecentDataFile(30, envName);
+  
+  // todayData.data is the API response { code, status, data: [...] }
+  // so todayData.data.data is the actual array of services
+  const todayServices = todayData.data.data || [];
+  
+  if (!previousDataResult) {
+    console.log(`⚠️  [${envName}] No previous data file found. Showing today's data only.`);
+    const comparison = calculateComparison(todayServices, []);
+    return {
+      envName,
+      comparison,
+      todayDateString,
+      previousDateString: yesterdayDateString,
+      hasYesterdayData: false
+    };
+  }
+  
+  const previousData = previousDataResult.data;
+  const previousDateString = previousDataResult.dateString;
+  const daysAgo = previousDataResult.daysAgo;
+  
+  if (previousDateString === yesterdayDateString) {
+    console.log(`✅ [${envName}] Found data file for yesterday: ${previousDateString}`);
+  } else {
+    console.log(`ℹ️  [${envName}] No data file found for yesterday (${yesterdayDateString}). Using most recent available: ${previousDateString} (${daysAgo} day${daysAgo > 1 ? 's' : ''} ago)`);
+  }
+  
+  const comparison = calculateComparison(todayServices, previousData.data || []);
+  
+  return {
+    envName,
+    comparison,
+    todayDateString,
+    previousDateString,
+    hasYesterdayData: true
+  };
+}
+
+async function compareAllEnvironments(allEnvData) {
+  const envResults = [];
+  
+  for (const [envName, envData] of Object.entries(allEnvData)) {
+    const result = await compareDataForEnv(envData, envName);
+    envResults.push(result);
+  }
+  
+  // Generate combined HTML report
+  const htmlContent = generateMultiEnvHTML(envResults);
+  
+  const outputPath = path.join(__dirname, 'comparison-report.html');
+  await fs.writeFile(outputPath, htmlContent);
+  
+  console.log(`\n✅ Combined comparison report generated: ${outputPath}`);
+  
+  // Extract table HTML for Teams posting
+  const tableHTML = extractTableHTML(htmlContent);
+  
+  return {
+    envResults,
+    htmlPath: outputPath,
+    tableHTML: tableHTML || htmlContent
+  };
+}
+
 async function compareData(todayData) {
   const todayDateString = getDateString();
   const yesterdayDateString = getYesterdayDateString();
@@ -183,5 +258,5 @@ async function compareData(todayData) {
   };
 }
 
-export { compareData };
+export { compareData, compareAllEnvironments };
 

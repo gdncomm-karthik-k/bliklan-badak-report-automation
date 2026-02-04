@@ -6,8 +6,16 @@ function getCurrentMonthYear() {
   return `${month}-${year}`;
 }
 
-export const API_URL = `https://neo-badak.gdn-app.com/api/engineering-report/byCollabId/1020?monthAndYear=${getCurrentMonthYear()}&environmentId=2&engineeringReportStatus=1&engineeringReportStatus=2&collabId=`;
-console.log(API_URL)
+const BASE_URL = `https://neo-badak.gdn-app.com/api/engineering-report/byCollabId/1020?monthAndYear=${getCurrentMonthYear()}&engineeringReportStatus=1&engineeringReportStatus=2&collabId=`;
+
+export const ENVIRONMENTS = [
+  { id: 2, name: 'QA2', url: `${BASE_URL}&environmentId=2` },
+  { id: 5, name: 'Preprod', url: `${BASE_URL}&environmentId=5` }
+];
+
+// Keep for backward compatibility
+export const API_URL = ENVIRONMENTS[0].url;
+
 export const SERVICE_NAMES = [
   "Bliklan Campaign Management API",
   "Bliklan Tracker Aggregator API",

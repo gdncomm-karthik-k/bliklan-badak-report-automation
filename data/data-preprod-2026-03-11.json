@@ -1,0 +1,199 @@
+{
+  "code": 200,
+  "status": "OK",
+  "data": [
+    {
+      "id": 1213,
+      "name": "Bliklan Center UI",
+      "totalTestcaseInTestlink": 101,
+      "totalAutomationDailyPass": 0,
+      "totalAutomationDailyFailed": 0,
+      "totalRegressionAutomateable": 101,
+      "totalRegressionPass": 63,
+      "totalRegressionFailed": 28,
+      "totalSanityAutomateable": 12,
+      "totalSanityPass": 11,
+      "totalSanityFailed": 0,
+      "totalIntegrationAutomateable": 0,
+      "totalIntegrationPass": 1,
+      "totalIntegrationFailed": 0,
+      "totalIssueFound": 0,
+      "lastBuildTime": "2026-03-09 06:27:00",
+      "tagsData": [
+        {
+          "id": 828894452,
+          "tagsName": "@Negative",
+          "pass": 17,
+          "failed": 3
+        },
+        {
+          "id": 828894453,
+          "tagsName": "@Positive",
+          "pass": 52,
+          "failed": 26
+        }
+      ]
+    },
+    {
+      "id": 1249,
+      "name": "Bliklan Campaign Management API",
+      "totalTestcaseInTestlink": 169,
+      "totalAutomationDailyPass": 0,
+      "totalAutomationDailyFailed": 0,
+      "totalRegressionAutomateable": 161,
+      "totalRegressionPass": 125,
+      "totalRegressionFailed": 14,
+      "totalSanityAutomateable": 10,
+      "totalSanityPass": 12,
+      "totalSanityFailed": 0,
+      "totalIntegrationAutomateable": 8,
+      "totalIntegrationPass": 5,
+      "totalIntegrationFailed": 3,
+      "totalIssueFound": 0,
+      "lastBuildTime": "2026-03-12 03:30:09",
+      "tagsData": [
+        {
+          "id": 828894457,
+          "tagsName": "@Negative",
+          "pass": 27,
+          "failed": 1
+        },
+        {
+          "id": 828894459,
+          "tagsName": "@Positive",
+          "pass": 101,
+          "failed": 14
+        }
+      ]
+    },
+    {
+      "id": 1261,
+      "name": "Bliklan Tracker Aggregator API",
+      "totalTestcaseInTestlink": 79,
+      "totalAutomationDailyPass": 0,
+      "totalAutomationDailyFailed": 0,
+      "totalRegressionAutomateable": 77,
+      "totalRegressionPass": 84,
+      "totalRegressionFailed": 0,
+      "totalSanityAutomateable": 5,
+      "totalSanityPass": 5,
+      "totalSanityFailed": 0,
+      "totalIntegrationAutomateable": 2,
+      "totalIntegrationPass": 2,
+      "totalIntegrationFailed": 0,
+      "totalIssueFound": 0,
+      "lastBuildTime": "2026-03-12 08:51:00",
+      "tagsData": [
+        {
+          "id": 828894466,
+          "tagsName": "@Positive",
+          "pass": 54,
+          "failed": 0
+        }
+      ]
+    },
+    {
+      "id": 1277,
+      "name": "Bliklan Credit Service API",
+      "totalTestcaseInTestlink": 153,
+      "totalAutomationDailyPass": 0,
+      "totalAutomationDailyFailed": 0,
+      "totalRegressionAutomateable": 149,
+      "totalRegressionPass": 126,
+      "totalRegressionFailed": 7,
+      "totalSanityAutomateable": 10,
+      "totalSanityPass": 10,
+      "totalSanityFailed": 0,
+      "totalIntegrationAutomateable": 4,
+      "totalIntegrationPass": 3,
+      "totalIntegrationFailed": 0,
+      "totalIssueFound": 0,
+      "lastBuildTime": "2026-03-12 05:00:11",
+      "tagsData": [
+        {
+          "id": 828894488,
+          "tagsName": "@Negative",
+          "pass": 32,
+          "failed": 1
+        },
+        {
+          "id": 828894489,
+          "tagsName": "@Positive",
+          "pass": 63,
+          "failed": 4
+        }
+      ]
+    },
+    {
+      "id": 1283,
+      "name": "Bliklan Compute Engine",
+      "totalTestcaseInTestlink": 20,
+      "totalAutomationDailyPass": 0,
+      "totalAutomationDailyFailed": 0,
+      "totalRegressionAutomateable": 14,
+      "totalRegressionPass": 14,
+      "totalRegressionFailed": 1,
+      "totalSanityAutomateable": 1,
+      "totalSanityPass": 1,
+      "totalSanityFailed": 0,
+      "totalIntegrationAutomateable": 6,
+      "totalIntegrationPass": 6,
+      "totalIntegrationFailed": 0,
+      "totalIssueFound": 0,
+      "lastBuildTime": "2026-03-12 02:30:10",
+      "tagsData": [
+        {
+          "id": 828894510,
+          "tagsName": "@Negative",
+          "pass": 1,
+          "failed": 0
+        },
+        {
+          "id": 828894512,
+          "tagsName": "@Positive",
+          "pass": 17,
+          "failed": 0
+        }
+      ]
+    },
+    {
+      "id": 1441,
+      "name": "Bliklan Ads Engine",
+      "totalTestcaseInTestlink": 112,
+      "totalAutomationDailyPass": 0,
+      "totalAutomationDailyFailed": 0,
+      "totalRegressionAutomateable": 111,
+      "totalRegressionPass": 76,
+      "totalRegressionFailed": 21,
+      "totalSanityAutomateable": 8,
+      "totalSanityPass": 6,
+      "totalSanityFailed": 1,
+      "totalIntegrationAutomateable": 1,
+      "totalIntegrationPass": 1,
+      "totalIntegrationFailed": 0,
+      "totalIssueFound": 0,
+      "lastBuildTime": "2026-03-12 07:17:00",
+      "tagsData": []
+    },
+    {
+      "id": 1464,
+      "name": "Bliklan Campaign Management and Analytics UI",
+      "totalTestcaseInTestlink": 167,
+      "totalAutomationDailyPass": null,
+      "totalAutomationDailyFailed": null,
+      "totalRegressionAutomateable": 145,
+      "totalRegressionPass": null,
+      "totalRegressionFailed": null,
+      "totalSanityAutomateable": 16,
+      "totalSanityPass": null,
+      "totalSanityFailed": null,
+      "totalIntegrationAutomateable": 22,
+      "totalIntegrationPass": null,
+      "totalIntegrationFailed": null,
+      "totalIssueFound": 0,
+      "lastBuildTime": "",
+      "tagsData": []
+    }
+  ],
+  "errorCode": null
+}

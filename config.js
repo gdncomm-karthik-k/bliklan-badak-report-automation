@@ -21,7 +21,8 @@ export const SERVICE_NAMES = [
   "Bliklan Tracker Aggregator API",
   "Bliklan Credit Service API",
   "Bliklan Compute Engine",
-  "Bliklan Ads Engine"
+  "Bliklan Ads Engine",
+  "Bliklan Campaign Management and Analytics UI"
 ];
 
 export const DATA_DIR = "./data";
